@@ -3,9 +3,8 @@ import openai
 import requests
 import json
 
-
-def get_image_content(prompt, API, file_path):
-    phrases = ["abstract art", "photorealistic 4k", "Cyberpunk", "Oil paint", 'futurism']
+def get_image_content(prompt, API, file_path, logger):
+    phrases = [" Abstract art", " Photorealistic", " Cyberpunk", " Oil paint", " Futurism"]
     random_phrase = random.choice(phrases)
     full_string = prompt + random_phrase
 
@@ -20,10 +19,10 @@ def get_image_content(prompt, API, file_path):
                 f.write(response.content)
             return file_path, image_url
         else:
-            print(f"Failed to download the image. HTTP Status Code: {response.status_code}")
+            logger.error(f"Failed to download the image. HTTP Status Code: {response.status_code}")
             return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         return None
 def get_image_description(API, image_link, logger):
 
@@ -65,5 +64,4 @@ def get_image_description(API, image_link, logger):
             logger.error('Output Error:', asticaAPI_result.get('error', 'Unknown Error'))
     else:
         logger.error('Invalid response')
-OPENAI_API = "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"
 

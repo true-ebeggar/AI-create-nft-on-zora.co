@@ -1,0 +1,9 @@
+selenium
+pandas
+nltk
+colorlog
+colorama
+selenium-wire
+requests
+openai
+logging
